@@ -1,26 +1,32 @@
 {
-  "name": "@imgcook/plugin-template",
+  "name": "@imgcook/plugin-react-mod-add",
   "version": "0.0.1",
-  "description": "plugin template",
+  "description": "plugin-react-mod-add",
   "main": "index.js",
   "scripts": {
     "test": "nyc --reporter=text mocha test/__test__.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/imgcook-plugin/plugin-template.git"
+    "url": "git+https://github.com/imgcook-plugin/plugin-react-mod-add.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/imgcook-plugin/plugin-template/issues"
+    "url": "https://github.com/imgcook-plugin/plugin-react-mod-add/issues"
   },
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/imgcook-plugin/plugin-template#readme",
+  "homepage": "https://github.com/imgcook-plugin/plugin-react-mod-add#readme",
   "devDependencies": {
     "chai": "^4.2.0",
     "nyc": "^14.1.1"
+  },
+  "dependencies": {
+    "@imgcook/cli-utils": "0.1.0-alpha.4",
+    "chalk": "^3.0.0",
+    "fs-extra": "^8.1.0",
+    "ora": "^4.0.3"
   }
 }

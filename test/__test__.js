@@ -10,7 +10,7 @@ describe('index.js', () => {
       accessId: 'xx',
       dslId: 41,
       generator: ['@imgcook/generator-react'],
-      plugin: ['@imgcook/plugin-images', '@imgcook/plugin-generate'],
+      plugin: [],
       uploadUrl: '',
       value: '17679'
     }
@@ -20,9 +20,8 @@ describe('index.js', () => {
     expect(options.filePath).to.be.a('string');
   });
   it('index callback result', async () => {
-    const result = await index(options);
-    expect(result).to.be.an('object');
-    expect(result.code).to.be.an('object');
-    expect(result.code.panelDisplay).to.be.an('array');
+    const data = await index(options);
+    expect(data.code).to.be.an('object');
+    expect(data.code.panelDisplay).to.be.an('array');
   });
 });
