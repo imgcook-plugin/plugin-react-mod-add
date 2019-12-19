@@ -23,7 +23,7 @@ const pluginHandler = async options => {
   // const defaultFilePath = filePath;
   
   try {
-    filePath = `${filePath}/src/mods/mod${value}`;
+    filePath = `${filePath}/src/mods/mod${value || (data.moduleData && data.moduleData.id)}`;
     if (!fse.existsSync(`${filePath}`)) {
       fse.mkdirSync(`${filePath}`);
     }
