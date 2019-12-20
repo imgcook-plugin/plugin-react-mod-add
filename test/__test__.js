@@ -20,7 +20,7 @@ describe('index.js', () => {
     expect(options.filePath).to.be.a('string');
   });
   it('index callback result', async () => {
-    const data = await index(options);
+    const { data } = await index(options);
     expect(data.code).to.be.an('object');
     expect(data.code.panelDisplay).to.be.an('array');
   });

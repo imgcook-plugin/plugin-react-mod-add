@@ -8,7 +8,6 @@
 
 const fse = require('fs-extra');
 const ora = require('ora');
-const spinner = ora();
 const imageHandler = require('./imageHandler');
 
 const pluginHandler = async options => {
@@ -20,10 +19,10 @@ const pluginHandler = async options => {
     errorList: []
   };
   const panelDisplay = data.code.panelDisplay;
-  // const defaultFilePath = filePath;
-  
+
   try {
-    filePath = `${filePath}/src/mods/mod${value || (data.moduleData && data.moduleData.id)}`;
+    filePath = `${filePath}/src/mods/mod${value ||
+      (data.moduleData && data.moduleData.id)}`;
     if (!fse.existsSync(`${filePath}`)) {
       fse.mkdirSync(`${filePath}`);
     }
@@ -82,33 +81,9 @@ const pluginHandler = async options => {
     }
   } catch (error) {
     result.errorList.push(error);
-    console.log(error);
   }
 
-  // Retrieve mods directory update index
-  // try {
-  //   let modList = [];
-  //   let string = '';
-  //   modList = fse.readdirSync(`${defaultFilePath}/src/mods/`).filter(v => {
-  //     return v !== 'index.js';
-  //   });
-  //   modList.map(name => {
-  //     string += `import ${name} from './${name}'\n`;
-  //   });
-  //   string += 'export default {\n';
-  //   modList.map(name => {
-  //     string += `\t${name},\n`;
-  //   });
-  //   string += '}';
-  //   fse.writeFileSync(`${defaultFilePath}/src/mods/index.js`, string, 'utf-8');
-  //   setTimeout(() => {
-  //     spinner.succeed(` 索引文件 index.js 更新完成`);
-  //   }, 0);
-  // } catch (error) {
-  //   result.errorList.push(error);
-  // }
-  // console.log({ data, filePath, config, result });
-  return { ...data, filePath, config, result };
+  return { data, filePath, config, result };
 };
 
 module.exports = (...args) => {
