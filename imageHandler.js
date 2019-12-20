@@ -93,6 +93,10 @@ const loader = async options => {
     item.panelValue = fileValue;
     index++;
   }
+  const imgrcPath = `${filePath}/public/images/.imgrc`;
+  if (fs.existsSync(imgrcPath)) {
+    fs.unlinkSync(imgrcPath);
+  }
   return { ...data, filePath, config };
 };
 

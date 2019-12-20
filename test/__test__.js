@@ -1,4 +1,5 @@
 const mockData = require('./mockData');
+const fs = require('fs');
 const expect = require('chai').expect;
 
 describe('index.js', () => {
@@ -15,6 +16,26 @@ describe('index.js', () => {
       value: '17679'
     }
   };
+  it('file path init', () => {
+    const files = {
+      src: `${options.filePath}/src`,
+      public: `${options.filePath}/public`,
+      mods: `${options.filePath}/src/mods`,
+    }
+    if (!fs.existsSync(options.filePath)) {
+      fs.mkdirSync(options.filePath);
+    }
+    if (!fs.existsSync(files.src)) {
+      fs.mkdirSync(files.src);
+    }
+    if (!fs.existsSync(files.public)) {
+      fs.mkdirSync(files.public);
+    }
+    if (!fs.existsSync(files.mods)) {
+      fs.mkdirSync(files.mods);
+    }
+  })
+
   it('index check param', async () =>{
     expect(options).to.be.an('object');
     expect(options.filePath).to.be.a('string');

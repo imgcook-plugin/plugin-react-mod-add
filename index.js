@@ -19,12 +19,12 @@ const pluginHandler = async options => {
     errorList: []
   };
   const panelDisplay = data.code.panelDisplay;
-
+  let modFilePath = filePath;
   try {
-    filePath = `${filePath}/src/mods/mod${value ||
+    modFilePath = `${filePath}/src/mods/mod${value ||
       (data.moduleData && data.moduleData.id)}`;
-    if (!fse.existsSync(`${filePath}`)) {
-      fse.mkdirSync(`${filePath}`);
+    if (!fse.existsSync(`${modFilePath}`)) {
+      fse.mkdirSync(`${modFilePath}`);
     }
   } catch (error) {
     result.errorList.push(error);
@@ -34,7 +34,7 @@ const pluginHandler = async options => {
     for (const item of panelDisplay) {
       let panelValue = item.panelValue;
       const { panelName } = item;
-      let outputFilePath = `${filePath}/${panelName}`;
+      let outputFilePath = `${modFilePath}/${panelName}`;
       if (item && item.filePath) {
         let str = item.filePath;
         if (typeof str === 'string') {
@@ -51,7 +51,7 @@ const pluginHandler = async options => {
             fse.mkdirSync(folder);
           }
         }
-        outputFilePath = `${filePath}/${item.filePath}${panelName}`;
+        outputFilePath = `${modFilePath}/${item.filePath}${panelName}`;
       }
 
       // Depend on merge processing for package
