@@ -21,12 +21,15 @@ const uploadData = (file, filepath, option) => {
 
 const loader = async options => {
   let imgArr = [];
-  let { data } = options;
-  const { filePath, config } = options;
+  let { data, filePath } = options;
+  const { config } = options;
   const panelDisplay = data.code.panelDisplay;
   const moduleData = data.moduleData;
   let index = 0;
-
+  if (config.value) {
+    filePath = filePath.replace(config.value, '')
+  }
+  
   for (const item of panelDisplay) {
     let fileValue = item.panelValue;
     const temporaryImages = `${(

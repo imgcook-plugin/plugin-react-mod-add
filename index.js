@@ -7,14 +7,12 @@
  */
 
 const fse = require('fs-extra');
-const ora = require('ora');
 const imageHandler = require('./imageHandler');
 
 const pluginHandler = async options => {
   let data = await imageHandler(options);
   let { config, filePath } = data;
   const { value } = config;
-
   let result = {
     errorList: []
   };
