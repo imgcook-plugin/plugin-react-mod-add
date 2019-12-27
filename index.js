@@ -21,9 +21,7 @@ const pluginHandler = async options => {
   try {
     modFilePath = `${filePath}/src/mods/mod${value ||
       (data.moduleData && data.moduleData.id)}`;
-    if (!fse.existsSync(`${modFilePath}`)) {
-      fse.mkdirSync(`${modFilePath}`);
-    }
+    fse.ensureDirSync(modFilePath);
   } catch (error) {
     result.errorList.push(error);
   }

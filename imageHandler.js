@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fse = require('fs-extra');
 const { unique, downloadImg } = require('@imgcook/cli-utils');
 const UPLOAD = require('./utils/upload');
 const upload = new UPLOAD();
@@ -41,15 +41,16 @@ const loader = async options => {
     if (imgArr && imgArr.length > 0) {
       imgArr = unique(imgArr);
       const imgPath = `${filePath}/public/images`;
+      fse.ensureDirSync(imgPath);
       let imgObj = [];
       const imgrc = `${imgPath}/.imgrc`;
-      if (fs.existsSync(imgrc)) {
-        let imgConfig = fs.readFileSync(imgrc, 'utf8');
+      if (fse.existsSync(imgrc)) {
+        let imgConfig = fse.readFileSync(imgrc, 'utf8');
         imgObj = JSON.parse(imgConfig) || [];
       }
       for (let idx = 0; idx < imgArr.length; idx++) {
-        if (!fs.existsSync(imgPath)) {
-          fs.mkdirSync(imgPath);
+        if (!fse.existsSync(imgPath)) {
+          fse.mkdirSync(imgPath);
         }
         let suffix = imgArr[idx].split('.');
         suffix = suffix[suffix.length - 1];
@@ -90,15 +91,15 @@ const loader = async options => {
         }
       }
       if (imgObj.length > 0) {
-        fs.writeFileSync(imgrc, JSON.stringify(imgObj), 'utf8');
+        fse.writeFileSync(imgrc, JSON.stringify(imgObj), 'utf8');
       }
     }
     item.panelValue = fileValue;
     index++;
   }
   const imgrcPath = `${filePath}/public/images/.imgrc`;
-  if (fs.existsSync(imgrcPath)) {
-    fs.unlinkSync(imgrcPath);
+  if (fse.existsSync(imgrcPath)) {
+    fse.unlinkSync(imgrcPath);
   }
   return { ...data, filePath, config };
 };
